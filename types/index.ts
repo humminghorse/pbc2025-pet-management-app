@@ -20,3 +20,17 @@ export type User = {
   id: string
   email: string
 }
+
+// AI画像識別関連の型
+export type BreedIdentificationResult = {
+  breed: string
+  confidence: number
+  category: "Dog" | "Cat" | "Other"
+  description?: string
+  error?: string
+}
+
+export type BreedIdentificationRequest = {
+  imageData: string
+  category: "Dog" | "Cat" | "Other"
+}
