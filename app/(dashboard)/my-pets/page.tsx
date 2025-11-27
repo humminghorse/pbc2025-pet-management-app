@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { PetCard } from "@/components/pet-card"
+import { PetBreedingSimulator } from "@/components/pet-breeding-simulator"
 import { Plus } from "lucide-react"
 import { Pet } from "@/types"
 
@@ -86,11 +87,23 @@ export default function MyPetsPage() {
           </Link>
         </div>
       ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {pets.map((pet) => (
-            <PetCard key={pet.id} pet={pet} />
-          ))}
-        </div>
+        <>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {pets.map((pet) => (
+              <PetCard key={pet.id} pet={pet} />
+            ))}
+          </div>
+
+          {/* ペット繁殖シミュレーター - 2匹以上いる場合のみ表示 */}
+          {pets.length >= 2 && (
+            <div className="mt-12">
+              <h2 className="mb-6 text-2xl font-bold text-gray-900">
+                Pet Breeding Simulator
+              </h2>
+              <PetBreedingSimulator pets={pets} />
+            </div>
+          )}
+        </>
       )}
     </div>
   )

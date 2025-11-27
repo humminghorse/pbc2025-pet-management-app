@@ -18,11 +18,11 @@ interface PetInfo {
 // POST /api/pets/[id]/care-advice - ペットケアのアドバイスを取得
 export async function POST(
   request: Request,
-  { params }: { params: { id: string } }
+  { params: _params }: { params: { id: string } }
 ) {
   try {
     // 認証チェック
-    const cookieStore = await cookies()
+    const cookieStore = cookies()
     const supabase = createRouteHandlerClient({ cookies: () => cookieStore })
 
     const {
@@ -105,7 +105,7 @@ ${chatHistory}
 
     // Gemini APIにリクエスト
     const result = await model.generateContent(fullPrompt)
-    const response = await result.response
+    const response = result.response
     const advice = response.text()
 
     return NextResponse.json({ advice: advice.trim() }, { status: 200 })
