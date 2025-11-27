@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DeletePetDialog } from "@/components/delete-pet-dialog"
 import { WeightChart } from "@/components/weight-chart"
 import { WeightForm } from "@/components/weight-form"
+import { PetCareChat } from "@/components/pet-care-chat"
 import { Edit, ArrowLeft } from "lucide-react"
 import { Pet, WeightRecord } from "@/types"
 import { differenceInYears, differenceInMonths, format } from "date-fns"
@@ -200,6 +201,18 @@ export default function PetDetailPage({
         <h2 className="text-2xl font-bold text-gray-900">Weight Management</h2>
         <WeightChart weightRecords={weightRecords} />
         <WeightForm petId={pet.id} onSuccess={handleWeightAdded} />
+      </div>
+
+      {/* AI Pet Care Advisor Section */}
+      <div className="mt-8 space-y-6">
+        <h2 className="text-2xl font-bold text-gray-900">AI Pet Care Advisor</h2>
+        <PetCareChat
+          petId={pet.id}
+          petName={pet.name}
+          petCategory={pet.category}
+          petBreed={pet.breed}
+          petAge={pet.birthday ? calculateAge(new Date(pet.birthday).toISOString()) : undefined}
+        />
       </div>
     </div>
   )
